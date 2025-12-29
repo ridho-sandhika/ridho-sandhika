@@ -1,16 +1,38 @@
-## Hi there 👋
+# Hi there 👋 I'm Ridho Sandhika 🚀
 
-<!--
-**ridho-sandhika/ridho-sandhika** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+💻 **Informatics Student | App & Web Developer**  
+⚡ Passionate about building useful, modern, and scalable applications  
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 👨‍💻 About Me
+- 🔭 Currently working on **Web & Mobile Applications**
+- 🌱 Learning **JavaScript, Firebase, Android, and Cloud Technologies**
+- 👯 Open to collaborate on **Open Source & Startup Projects**
+- 💬 Ask me about **Web Dev, App Dev, Database, Firebase**
+- ⚡ Fun fact: *Turning bugs into features since day one 😄*
+
+---
+
+## 🛠 Tech Stack
+![HTML](https://img.shields.io/badge/HTML-333?style=for-the-badge&logo=html5)
+![CSS](https://img.shields.io/badge/CSS-333?style=for-the-badge&logo=css3&logoColor=blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-333?style=for-the-badge&logo=javascript)
+![Firebase](https://img.shields.io/badge/Firebase-333?style=for-the-badge&logo=firebase)
+![Android](https://img.shields.io/badge/Android-333?style=for-the-badge&logo=android)
+
+---
+
+## 📊 GitHub Stats
+![Ridho's GitHub stats](https://github-readme-stats.vercel.app/api?username=ridho-sandhika&show_icons=true&theme=tokyonight)
+
+---
+
+## 📫 Connect With Me
+- 🌐 Portfolio: *Coming Soon*
+- 💬 WhatsApp: *Available on request*
+- 📧 Email: *your-email@example.com*
+
+---
+
+✨ *"Code. Learn. Improve. Repeat."*
