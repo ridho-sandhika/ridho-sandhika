@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Portfolio Ridho Sandhika | Fullstack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. SETUP & VARIABLES --- */
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --accent: #ff00cc;
+            --bg-dark: #0f0c29;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* --- ANTI SELECT TEXT (Kecuali Input Form) --- */
+        body {
+            background: radial-gradient(circle at top left, #1f1c2c, #0f0c29);
+            color: var(--text-main);
+            overflow-x: hidden; /* Mencegah scroll horizontal di HP */
+            min-height: 100vh;
+            
+            /* Mencegah teks diblok/copy */
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Agar user tetap bisa mengetik di form contact */
+        input, textarea {
+            user-select: text !important;
+            -webkit-user-select: text !important;
+        }
+
+        /* --- 2. BACKGROUND FX --- */
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+            top: -100px;
+            left: -100px;
+            z-index: -1;
+            animation: pulse 10s infinite alternate;
+        }
+        
+        .bg-glow-2 {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 0, 204, 0.1) 0%, rgba(0,0,0,0) 70%);
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* --- 3. NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(15, 12, 41, 0.9); /* Sedikit lebih gelap agar tulisan jelas */
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            z-index: 1001; /* Agar di atas menu mobile */
+        }
+        .logo span { color: var(--primary); }
+
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: var(--primary); }
+
+        /* Hamburger Menu Icon (Hidden on Desktop) */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--text-main);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* --- 4. GLOBAL SECTION STYLES --- */
+        .section {
+            padding: 100px 10%; /* Default Desktop */
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .section-header p {
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- 5. HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            min-height: 600px; /* Agar tidak terpotong di layar pendek */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10%;
+            text-align: center;
+            margin-top: -20px;
+        }
+
+        .hero-content { z-index: 2; max-width: 800px; width: 100%; }
+
+        .hero h2 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .typewriter span {
+            border-right: 3px solid var(--accent);
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            padding: 12px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            position: relative;
+            z-index: 1;
+            white-space: nowrap; /* Agar teks tombol tidak turun baris */
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), #3a7bd5);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 210, 255, 0.5); }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: white;
+        }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: rgba(0, 210, 255, 0.05); }
+
+        /* --- 6. ABOUT SECTION --- */
+        .about-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .profile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+        .profile-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+
+        .profile-img-box {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+            position: relative;
+        }
+
+        .profile-img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .profile-name { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+        .profile-role { color: var(--primary); font-size: 0.9rem; margin-bottom: 20px; letter-spacing: 1px; }
+
+        .profile-details-list {
+            list-style: none;
+            text-align: left;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .profile-details-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .profile-details-list li strong { color: var(--text-main); }
+
+        .about-content h3 { font-size: 2rem; margin-bottom: 20px; color: var(--text-main); line-height: 1.3; }
+        .about-content p { color: var(--text-muted); line-height: 1.7; margin-bottom: 25px; font-size: 1rem; }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .skill-tag {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .skill-tag:hover { background: rgba(0, 210, 255, 0.1); border-color: var(--primary); }
+
+        /* --- 7. PROJECTS SECTION --- */
+        .projects-grid {
+            display: grid;
+            /* Menggunakan minmax 280px agar aman di HP kecil */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover { border-color: var(--primary); }
+
+        .card-image { width: 100%; height: 200px; background: #2a2a2a; overflow: hidden; position: relative; }
+        .card-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover .card-image img { transform: scale(1.1); }
+        
+        .card-overlay {
+            position: absolute; top:0; left:0; width:100%; height:100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        .card-content { padding: 25px; transform: translateZ(20px); flex-grow: 1; display: flex; flex-direction: column; }
+        .card h3 { font-size: 1.4rem; margin-bottom: 8px; color: var(--text-main); }
+        .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; flex-grow: 1; }
+
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .tech-tag { font-size: 0.7rem; padding: 4px 10px; background: rgba(0, 210, 255, 0.1); border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 20px; color: var(--primary); }
+
+        .card-links { display: flex; justify-content: space-between; padding-top: 15px; border-top: 1px solid var(--border); margin-top: auto; }
+        .card-links a { color: white; text-decoration: none; font-size: 0.85rem; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
+        .card-links a:hover { color: var(--primary); }
+
+        /* --- 8. CONTACT SECTION --- */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .contact-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap; /* Agar icon turun ke bawah jika layar sempit */
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .contact-item i { font-size: 2rem; color: var(--primary); }
+        .contact-item span { color: var(--text-muted); font-size: 0.9rem; word-break: break-all; } /* Break all agar email panjang tidak offside */
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            color: white;
+            font-family: inherit;
+        }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--primary); }
+
+        /* --- 9. FOOTER --- */
+        footer {
+            padding: 50px 10%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: #0a081c;
+            margin-top: 50px;
+        }
+        .socials { margin-bottom: 20px; }
+        .socials a { color: var(--text-muted); font-size: 1.5rem; margin: 0 15px; transition: 0.3s; }
+        .socials a:hover { color: var(--primary); transform: translateY(-3px); }
+
+        /* Animation Classes */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- RESPONSIVE MEDIA QUERIES (UPDATED) --- */
+        
+        /* Tablet & Small Laptop (Max 1024px) */
+        @media (max-width: 1024px) {
+            .section { padding: 80px 5%; }
+            .hero h1 { font-size: 3.5rem; }
+            .about-container { grid-template-columns: 1fr; gap: 40px; }
+            .profile-card { max-width: 500px; margin: 0 auto; } /* Tengah di tablet */
+        }
+
+        /* Mobile Devices (Max 768px) */
+        @media (max-width: 768px) {
+            nav { padding: 15px 5%; }
+            
+            /* Menu Toggle Button (Hamburger) */
+            .menu-toggle { display: block; }
+
+            /* Mobile Menu Style */
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 12, 41, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px 0;
+                gap: 20px;
+                text-align: center;
+                border-bottom: 1px solid var(--border);
+                /* Efek Slide Down */
+                display: none; 
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: 0.3s ease;
+            }
+
+            /* Saat menu aktif */
+            nav ul.active {
+                display: flex;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1rem; }
+            .btn-group { flex-direction: column; width: 100%; }
+            .btn { width: 100%; text-align: center; }
+
+            .section-header h2 { font-size: 2rem; }
+            .about-content h3 { font-size: 1.6rem; }
+            
+            .contact-box { padding: 30px 20px; }
+            .contact-info { flex-direction: column; gap: 20px; }
+        }
+
+        /* Small Phones (Max 480px) */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.2rem; }
+            .logo { font-size: 1.2rem; }
+            .section { padding: 60px 5%; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <nav>
+        <div class="logo">Ridho<span>Sandhika</span></div>
+        
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <ul id="nav-menu">
+            <li><a href="#home" onclick="closeMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#projects" onclick="closeMenu()">Portfolio</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Halo, Saya Ridho Sandhika</h2>
+            <h1>Membangun Website <br><span class="typewriter" style="color:var(--primary)"></span></h1>
+            <p>Fullstack Developer yang berfokus pada solusi Offline-First, PWA, dan sistem manajemen terintegrasi. Pendiri <strong>AppWebiatech</strong>.</p>
+            
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">Lihat Karya</a>
+                <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="section-header reveal">
+            <p>Biodata & Skill</p>
+            <h2>Tentang Ridho</h2>
+        </div>
+        
+        <div class="about-container reveal">
+            
+            <div class="profile-card">
+                <div class="profile-img-box">
+                    <img src="logo.jpeg" alt="Foto Ridho Sandhika">
+                </div>
+                <div class="profile-name">Ridho Sandhika</div>
+                <div class="profile-role">Founder AppWebiatech</div>
+
+                <ul class="profile-details-list">
+                    <li><strong>Lokasi:</strong> <span>Medan - Indonesia</span></li>
+                    <li><strong>Pengalaman:</strong> <span>3+ Tahun</span></li>
+                    <li><strong>Email:</strong> <span>studioofficialridho@gmail.com</span></li>
+                    <li><strong>Status:</strong> <span style="color:#00ff88">Available for Work</span></li>
+                    <li><strong>Fokus:</strong> <span>PWA & IoT Systems</span></li>
+                </ul>
+            </div>
+
+            <div class="about-content">
+                <h3>Developer Spesialis <br><span style="color:var(--primary)">Hybrid & Offline Apps</span></h3>
+                <p>Saya adalah pengembang di balik <strong>AppWebiatech</strong>. Saya memiliki keahlian khusus dalam membangun aplikasi web yang dapat berjalan tanpa internet (Offline-First) namun tetap memiliki kemampuan sinkronisasi data (Cloud Sync) yang handal.</p>
+                <p>Dari sistem manajemen masjid hingga aplikasi kasir yang terintegrasi dengan printer thermal bluetooth, saya memastikan teknologi bekerja untuk memudahkan operasional sehari-hari.</p>
+                
+                <h4 style="margin-top:30px; color:var(--text-main);">Keahlian Teknis</h4>
+                <div class="skills-grid">
+                    <div class="skill-tag"><i class="fab fa-js"></i> JavaScript (ES6+)</div>
+                    <div class="skill-tag"><i class="fas fa-fire"></i> Firebase Firestore</div>
+                    <div class="skill-tag"><i class="fas fa-mobile-alt"></i> PWA Technology</div>
+                    <div class="skill-tag"><i class="fas fa-print"></i> Bluetooth API</div>
+                    <div class="skill-tag"><i class="fas fa-database"></i> LocalStorage</div>
+                    <div class="skill-tag"><i class="fab fa-html5"></i> HTML5 & CSS3</div>
+                    <div class="skill-tag"><i class="fab fa-android"></i> Android WebView</div>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="#contact" class="btn btn-primary">Ayo Diskusi</a>
+                    
+                    <a onclick="downloadCV()" class="btn btn-outline" style="cursor: pointer;">
+                        <i class="fas fa-download" style="margin-right: 8px;"></i> Unduh CV
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="projects">
+        <div class="section-header reveal">
+            <p>Karya Saya</p>
+            <h2>AppWebiatech Projects</h2>
+        </div>
+
+        <div class="projects-grid">
+            
+            <div class="card reveal" data-tilt>
+                <div class="card-image">
+                    <img src="SmartDKM.png" alt="Smart DKM">
+                    <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <h3>Smart DKM</h3>
+                    <p>Sistem manajemen masjid Hybrid (Online & Offline). Berfungsi sebagai Digital Signage (TV Masjid) yang datanya bisa diupdate realtime dari jarak jauh via HP Admin.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">IoT Integration</span>
+                        <span class="tech-tag">Firebase Sync</span>
+                        <span class="tech-tag">Hybrid App</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#"><i class="fas fa-info-circle"></i> Versi 2.99.5</a>
+                        <a href="https://www.mediafire.com/file/7uwlyxkftrptwqf/Smart+DKM.apk/file"><i class="fas fa-download"></i> Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card reveal" data-tilt>
+                <div class="card-image">
+                    <img src="KasirPro.png" alt="KasirPro">
+                    <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <h3>KasirPro</h3>
+                    <p>Aplikasi Point of Sales untuk UMKM. Fitur unggulan: Transaksi Offline total, Manajemen Stok, Laporan Excel, dan Cetak Struk via Printer Bluetooth Thermal.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Offline First</span>
+                        <span class="tech-tag">Bluetooth Print</span>
+                        <span class="tech-tag">Export Excel</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#"><i class="fas fa-info-circle"></i> Versi 1.0</a>
+                        <a href="https://www.mediafire.com/file/ogw2uqrxh7dr3pm/KasirPro.apk/file"><i class="fas fa-download"></i> Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card reveal" data-tilt>
+                <div class="card-image">
+                    <img src="ZikirNur.jpg" alt="ZikirNur">
+                    <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <h3>ZikirNur</h3>
+                    <p>Aplikasi pendamping ibadah lengkap. Fitur: Notifikasi Adzan otomatis sesuai lokasi, Al-Quran Offline, Tasbih Digital, dan Arah Kiblat akurat.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Geolocation</span>
+                        <span class="tech-tag">Audio API</span>
+                        <span class="tech-tag">PWA</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#"><i class="fas fa-info-circle"></i> Versi 1.2.0</a>
+                        <a href="https://www.mediafire.com/file/3mfxhg5j6w0a8b7/ZikurNur.apk/file"><i class="fas fa-download"></i> Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card reveal" data-tilt>
+                <div class="card-image">
+                    <img src="Kalkulator.png" alt="Kalkulator">
+                    <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <h3>Kalkulator Pintar</h3>
+                    <p>Aplikasi utilitas matematika dengan antarmuka modern. Mendukung mode Ilmiah (Scientific) dan Konversi Satuan yang presisi.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Algorithm</span>
+                        <span class="tech-tag">CSS Grid</span>
+                        <span class="tech-tag">Math Logic</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="#"><i class="fas fa-info-circle"></i> Versi 1.0</a>
+                        <a href="https://www.mediafire.com/file/84gzenmyza0w4d3/Kalkulator.apk/file"><i class="fas fa-download"></i> Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card reveal" data-tilt>
+                <div class="card-image">
+                    <img src="appwebiatecth.png" alt="App Store">
+                    <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <h3>AppWebiatech Store</h3>
+                    <p>Platform distribusi aplikasi sendiri (seperti Play Store). Fitur: Pencarian dinamis, Sistem Rating Firebase, Kode Promo, dan Dark Mode.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Dynamic UI</span>
+                        <span class="tech-tag">Search Engine</span>
+                        <span class="tech-tag">Web Platform</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://appwebiatech.github.io/AppWebiatech-Store/"><i class="fas fa-globe"></i> Kunjungi</a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="section-header reveal">
+            <p>Hubungi Saya</p>
+            <h2>Mari Bekerja Sama</h2>
+        </div>
+
+        <div class="contact-container reveal">
+            <div class="contact-box">
+                <p style="margin-bottom: 20px; color: var(--text-muted);">Butuh aplikasi custom seperti Smart DKM atau KasirPro? Jangan ragu hubungi saya.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>appwebiatech@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>+62 812 7562 3551</span>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="sendToWhatsapp(event)">
+                    <input type="text" id="wa-name" placeholder="Nama Anda" required>
+                    <input type="email" id="wa-email" placeholder="Email Anda" required>
+                    <textarea id="wa-message" rows="5" placeholder="Pesan Project..." required></textarea>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; border:none; cursor:pointer;">Kirim ke WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="socials">
+            <a href="https://github.com/ridho-sandhika"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/ridhosandhika_?igsh=MW9laWY4aDZhdWJsOQ=="><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/qr/CQLVQO6EMJTYM1"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2025 <strong>Ridho Sandhika</strong> - Powered by AppWebiatech.</p>
+    </footer>
+
+    <script>
+        // --- 0. MOBILE MENU TOGGLE LOGIC (NEW) ---
+        function toggleMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            const menuIcon = document.querySelector('.menu-toggle i');
+            
+            navMenu.classList.toggle('active');
+            
+            // Ubah icon bars jadi times (silang) saat aktif
+            if(navMenu.classList.contains('active')){
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        }
+
+        // Tutup menu saat link diklik
+        function closeMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            const menuIcon = document.querySelector('.menu-toggle i');
+            navMenu.classList.remove('active');
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+        }
+
+        // --- 1. TYPEWRITER EFFECT ---
+        const textElement = document.querySelector('.typewriter');
+        const words = ["Digital.", "Smart System.", "Modern.", "Profesional."];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                textElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 100 : 200);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+        // --- 2. 3D TILT EFFECT ---
+        // (Only apply on desktop to save battery on mobile)
+        if (window.innerWidth > 900) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -8; 
+                    const rotateY = ((x - centerX) / centerX) * 8;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+                });
+            });
+        }
+
+        // --- 3. SCROLL REVEAL ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 50; // trigger lebih cepat di HP
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // --- 4. FUNCTION UNDUH CV OTOMATIS (UPDATED: Added Mediaga Group) ---
+        function downloadCV() {
+            const cvContent = `
+            <!DOCTYPE html>
+            <html lang="id">
+            <head>
+                <meta charset="UTF-8">
+                <title>Ridho Sandhika</title>
+                <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+                <style>
+                    body { 
+                        font-family: 'Roboto', sans-serif; 
+                        background-color: #f4f7f6; 
+                        color: #333; 
+                        margin: 0; 
+                        padding: 40px; 
+                    }
+                    .container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        background: #fff;
+                        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                        border-radius: 8px;
+                        overflow: hidden;
+                    }
+                    .header {
+                        background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+                        color: white;
+                        padding: 40px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .header-content h1 { margin: 0; font-size: 2.5em; letter-spacing: 1px; }
+                    .header-content p { margin: 5px 0 0; font-size: 1.1em; color: #00d2ff; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
+                    .contact-info { text-align: right; font-size: 0.9em; line-height: 1.6; color: #ccc; }
+                    .contact-info strong { color: #fff; }
+                    
+                    .content { padding: 40px; }
+                    .section { margin-bottom: 35px; }
+                    .section-title {
+                        font-size: 1.3em;
+                        color: #2c3e50;
+                        border-left: 5px solid #00d2ff;
+                        padding-left: 15px;
+                        margin-bottom: 20px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                    }
+                    
+                    p { line-height: 1.6; color: #555; }
+                    
+                    .skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
+                    .skill-badge {
+                        background: #eff2f7;
+                        color: #333;
+                        padding: 6px 14px;
+                        border-radius: 20px;
+                        font-size: 0.85em;
+                        font-weight: 500;
+                        border: 1px solid #e0e0e0;
+                    }
+
+                    .project-item {
+                        background: #fff;
+                        border: 1px solid #eee;
+                        border-left: 4px solid #3a7bd5;
+                        padding: 15px 20px;
+                        margin-bottom: 15px;
+                        border-radius: 4px;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+                    }
+                    .project-title { font-weight: 700; font-size: 1.1em; color: #222; margin-bottom: 5px; }
+                    .project-desc { font-size: 0.95em; color: #666; margin-bottom: 10px; }
+                    .tech-tag { 
+                        display: inline-block; 
+                        background: #e3f2fd; 
+                        color: #1565c0; 
+                        padding: 3px 8px; 
+                        border-radius: 4px; 
+                        font-size: 0.75em; 
+                        margin-right: 5px;
+                        font-weight: 600;
+                    }
+
+                    .edu-item { margin-bottom: 20px; position: relative; padding-left: 20px; }
+                    .edu-item::before {
+                        content: ''; position: absolute; left: 0; top: 5px; width: 8px; height: 8px; 
+                        background: #00d2ff; border-radius: 50%;
+                    }
+                    .edu-school { font-weight: 700; color: #333; }
+                    .edu-detail { font-size: 0.9em; color: #777; font-style: italic; }
+
+                    .footer-note {
+                        text-align: center; font-size: 0.8em; color: #aaa; margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <div class="header-content">
+                            <h1>Ridho Sandhika</h1>
+                            <p>Fullstack Developer</p>
+                        </div>
+                        <div class="contact-info">
+                            <strong>Email:</strong> studioofficialridho@gmail.com<br>
+                            <strong>Lokasi:</strong> Medan, Indonesia<br>
+                            <strong>Founder:</strong> AppWebiatech
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        
+                        <div class="section">
+                            <div class="section-title">Ringkasan Profesional</div>
+                            <p>Pengembang web dan aplikasi dengan spesialisasi pada solusi <strong>Offline-First</strong>, <strong>PWA</strong>, dan <strong>IoT</strong>. Memulai perjalanan coding secara otodidak sejak sebelum masa kuliah dengan hasrat tinggi terhadap teknologi, dan kini terus memperdalam keahlian melalui pendidikan formal serta eksplorasi proyek nyata yang solutif.</p>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">Pengalaman Kerja</div>
+                            <div class="project-item">
+                                <div class="project-title">Creative Design IT</div>
+                                <div class="project-desc" style="font-weight:bold; color:#3a7bd5;">PT. Medan Mediaga Group</div>
+                                <div class="project-desc">Bergabung sebagai Creative Design IT
+Mewujudkan ide kreatif menjadi aplikasi berita berbasis WebView yang inovatif, informatif, dan siap menjawab kebutuhan masyarakat digital.</div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">Keahlian Teknis</div>
+                            <div class="skills-container">
+                                <span class="skill-badge">JavaScript (ES6+)</span>
+                                <span class="skill-badge">Firebase Firestore</span>
+                                <span class="skill-badge">PWA Technology</span>
+                                <span class="skill-badge">Bluetooth Printing API</span>
+                                <span class="skill-badge">Android WebView</span>
+                                <span class="skill-badge">HTML5 & CSS3</span>
+                                <span class="skill-badge">IoT Integration</span>
+                                <span class="skill-badge">LocalStorage Sync</span>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">Portofolio Proyek</div>
+                            
+                            <div class="project-item">
+                                <div class="project-title">1. Smart DKM (Manajemen Masjid)</div>
+                                <div class="project-desc">Sistem hybrid (online/offline) untuk manajemen visual masjid (Digital Signage) yang dapat dikontrol jarak jauh.</div>
+                                <div><span class="tech-tag">IoT Integration</span> <span class="tech-tag">Firebase</span> <span class="tech-tag">Hybrid App</span></div>
+                            </div>
+
+                            <div class="project-item">
+                                <div class="project-title">2. KasirPro (Point of Sales)</div>
+                                <div class="project-desc">Aplikasi kasir offline-first untuk UMKM dengan fitur cetak struk langsung via printer thermal Bluetooth.</div>
+                                <div><span class="tech-tag">Bluetooth API</span> <span class="tech-tag">Offline Storage</span> <span class="tech-tag">Excel Export</span></div>
+                            </div>
+
+                            <div class="project-item">
+                                <div class="project-title">3. ZikirNur</div>
+                                <div class="project-desc">Aplikasi ibadah lengkap dengan jadwal sholat otomatis berbasis lokasi (Geolocation) dan Al-Quran offline.</div>
+                                <div><span class="tech-tag">PWA</span> <span class="tech-tag">Geolocation API</span></div>
+                            </div>
+
+                            <div class="project-item">
+                                <div class="project-title">4. AppWebiatech Store</div>
+                                <div class="project-desc">Platform distribusi aplikasi mandiri dengan fitur pencarian dinamis dan sistem rating realtime.</div>
+                                <div><span class="tech-tag">Web Platform</span> <span class="tech-tag">Dynamic UI</span></div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">Pendidikan & Latar Belakang</div>
+                            
+                            <div class="edu-item">
+                                <div class="edu-school">Tamatan SMA ( Sekolah Madrasah Aliyah)</div>
+                                <div class="edu-detail">Jurusan IPS</div>
+                            </div>
+                            
+                            <div class="edu-item">
+                                <div class="edu-school">Sedang Menjalani Perkuliahan</div>
+                                <div class="edu-detail">Fakultas Ilmu Komputer / Teknik Informatika / Universitas Potensi Utama</div>
+                            </div>
+
+                            <p style="margin-top: 15px; font-size: 0.95em;">
+                                <strong>Metode Belajar (Continuous Learning):</strong><br>
+                                Memulai dasar pemrograman web (HTML, CSS, JS) secara <em>otodidak</em> sebelum memasuki bangku kuliah. Saat ini aktif menggabungkan teori akademis di kelas dengan eksplorasi mandiri teknologi modern untuk menciptakan solusi digital yang berdampak.
+                            </p>
+                        </div>
+
+                        <div class="footer-note">
+                            &copy; 2025 Ridho Sandhika - Generated from Portfolio Website
+                        </div>
+
+                    </div>
+                </div>
+            </body>
+            </html>
+            `;
+
+            const blob = new Blob([cvContent], { type: 'text/html' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'CV_Ridho_Sandhika.html';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // --- 5. FUNCTION KIRIM KE WHATSAPP ---
+        function sendToWhatsapp(e) {
+            e.preventDefault(); 
+
+            const name = document.getElementById('wa-name').value;
+            const email = document.getElementById('wa-email').value;
+            const message = document.getElementById('wa-message').value;
+            const phoneNumber = "6281275623551"; 
+
+            const text = `Halo Ridho Sandhika, perkenalkan saya ${name}.%0A%0AEmail: ${email}%0A%0APesan Saya:%0A${message}`;
+            const url = `https://wa.me/${phoneNumber}?text=${text}`;
+            window.open(url, '_blank');
+        }
+
+        // --- 6. SECURITY / ANTI COPY ---
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('keydown', function(e) {
+            if(e.keyCode == 123) { e.preventDefault(); return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){ e.preventDefault(); return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){ e.preventDefault(); return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){ e.preventDefault(); return false; }
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){ e.preventDefault(); return false; }
+            if(e.ctrlKey && e.keyCode == 'C'.charCodeAt(0)){ e.preventDefault(); return false; }
+        });
+    </script>
+</body>
+</html>
