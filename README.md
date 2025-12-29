@@ -29,9 +29,9 @@
 ---
 
 ## 📫 Connect With Me
-- 🌐 Portfolio: *Coming Soon*
-- 💬 WhatsApp: *Available on request*
-- 📧 Email: *your-email@example.com*
+- 🌐 Portfolio: *https://github.com/ridho-sandhika*
+- 💬 WhatsApp: *081275623551*
+- 📧 Email: *studioofficialridho@gmail.com*
 
 ---
 
