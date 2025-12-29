@@ -29,7 +29,7 @@
 ---
 
 ## 📫 Connect With Me
-- 🌐 Portfolio: *https://github.com/ridho-sandhika*
+- 🌐 Portfolio: *https://ridho-sandhika.github.io/ridho-sandhika/*
 - 💬 WhatsApp: *081275623551*
 - 📧 Email: *studioofficialridho@gmail.com*
 
